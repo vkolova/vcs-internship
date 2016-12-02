@@ -8,12 +8,7 @@ var queue = {
     return this[this.index--]
   },
   isEmpty: function() {
-    if(this.index === 0) {
-      return true
-    } else {
-      return false
-    }
-  }
+    return this.index === 0
 
 }
 
