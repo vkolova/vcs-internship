@@ -1,0 +1,14 @@
+{
+  "name": "pizza",
+  "version": "1.0.0",
+  "description": "## A Pair or two",
+  "main": "Pizza.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mathjs": "^3.8.0"
+  }
+}
