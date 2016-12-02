@@ -12,11 +12,8 @@ function Pair (left, right) {
 }
 
 Pair.prototype.equals = function(pair) {
-  if (this.getLeft() === pair.getLeft() &&
-        this.getRight() === pair.getRight())
-    return true
-  else
-    return false
+  return this.getLeft() === pair.getLeft() &&
+        this.getRight() === pair.getRight()
 }
 
 Pair.prototype.toString = function() {

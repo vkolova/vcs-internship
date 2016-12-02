@@ -15,8 +15,5 @@ String.prototype.times = function(amount) {
 }
 
 String.prototype.blank = function() {
-  if (this.replace(/\s+/g, "").length)
-    return false
-  else
-    return true
+  return !(this.replace(/\s+/g, "").length)
 }

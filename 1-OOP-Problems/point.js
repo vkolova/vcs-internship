@@ -28,11 +28,8 @@ function Point(x, y) {
 }
 
 Point.prototype.equals = function(point) {
-  if (this.getX() === point.getX() &&
-        this.getY() === point.getY())
-    return true
-  else
-    return false
+  return this.getX() === point.getX() &&
+        this.getY() === point.getY()
 }
 
 Point.prototype.toString = function() {
