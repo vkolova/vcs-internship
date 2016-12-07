@@ -1,0 +1,6 @@
+MongoDB shell version v3.4.0
+connecting to: mongodb://127.0.0.1:27017/dbs
+2016-12-07T18:16:25.690+0200 W NETWORK  [main] Failed to connect to 127.0.0.1:27017, reason: Connection refused
+2016-12-07T18:16:25.690+0200 E QUERY    [main] Error: couldn't connect to server 127.0.0.1:27017, connection attempt failed :
+connect@src/mongo/shell/mongo.js:234:13
+@(connect):1:6
