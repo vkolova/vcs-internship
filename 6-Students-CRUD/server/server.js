@@ -64,8 +64,6 @@ app.post("/student", function(req, res) {
     courses: req.body.courses
   }
 
-  console.log(student)
-
   if(req.body.facultyNumber) {
     Student.update({
       facultyNumber: req.body.facultyNumber
@@ -78,7 +76,7 @@ app.post("/student", function(req, res) {
           status: "error_on_saving"
         })
       }
-      console.log("saved")
+
       res.json({
         status: "saved"
       })

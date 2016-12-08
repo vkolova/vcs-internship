@@ -3,24 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>Students-CRUD</title>
+    <link rel="stylesheet" href="/styles.css">
+
   </head>
   <body>
     <div class="app">
-      <h2>Create student</h2>
+      <h2>Create/Update a student</h2>
       <form id="create" >
-        facultyNumber: <input type="text" name="ID"><br>
+        Faculty Number: <input type="text" name="ID"><br>
         Name: <input type="text" name="Name"><br>
         Courses: <input type="text" name="Courses" ><br>
         <input type="submit" value="Submit">
       </form>
 
+      <h2>See a student</h2>
+      <form id="see" >
+        Faculty Number: <input type="text" name="ID">
+        <input type="submit" value="Submit">
+      </form>
+
+      <h2>Delete a student</h2>
+      <form id="delete" >
+        Faculty Number: <input type="text" name="ID">
+        <input type="submit" value="Submit">
+      </form>
+
       <div id="list_students">
         <h2>All Students</h2>
-        <input id="list" type="submit" value="List students">
+        <input id="list" type="submit" value="View list of students">
+        <table class="list"></table>
       </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
     <script src="/src.js"></script>
+
   </body>
 </html>
