@@ -1,0 +1,41 @@
+body {
+  margin: 0 auto;
+  max-width: 50em;
+  background-color: #424242;
+  font-family: "Arial", sans-serif;
+}
+
+
+h1 {
+  color: #36d7ff;
+  border-left: 1px solid #36d7ff;
+  padding-left: 15px;
+}
+
+
+#render-target {
+  background-color: #C2C2C2;
+  border: 1px solid #00b4e0;
+  top: 100px;
+  position: fixed;
+}
+.statistics {
+  top: 100px;
+  right: 150px;
+  position: fixed;
+  background-color: #E3E3E3;
+  border: 1px solid #57B3F0;
+  color: #36d7ff;
+  padding: 15px;
+  height: 100px;
+  width: 200px;
+}
+
+
+#level {
+
+}
+
+#score {
+
+}
