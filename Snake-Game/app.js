@@ -1,162 +1,163 @@
 (function() {
 
-// 40 positions
-// 15px each apple
-// 15px snake width
-// observer => apple
-// subject => board
+  var Board = function() {
 
-  function ApplesList() {
-    this.applesList = []
-  }
-  ApplesList.prototype.add = function( obj ) {
-    return this.applesList.push( obj )
-  }
-  ApplesList.prototype.count = function() {
-    return this.applesList.length
-  }
-  ApplesList.prototype.get = function( index ) {
-    if( index > -1 && index < this.applesList.length ) {
-      return this.applesList[ index ]
-    }
-  }
-  ApplesList.prototype.indexOf = function( obj, startIndex ) {
-    var i = startIndex
-    while( i < this.applesList.length ) {
-      if( this.applesList[i] === obj ) {
-        return i
-      }
-      i++
-    }
-    return -1
-  }
-  ApplesList.prototype.removeAt = function( index ) {
-    this.applesList.splice( index, 1 )
-  }
+    var canvas = document.querySelector('#render-target')
+    var points = new PointsList()
 
-  function Board() {
-    this.apples = new ApplesList()
-  }
+    var level = 1
+    var score = 0
 
-  Board.prototype.addApple = function( apple ) {
-    this.apples.add( apple )
-  }
-
-  Board.prototype.removeApple = function( apple ) {
-    this.apples.removeAt( this.apples.indexOf( apple, 0 ) )
-  }
-  Board.prototype.notify = function( context ) {
-    var appleCount = this.apples.count()
-    for( var i = 0; i < appleCount; i++ ) {
-      this.apples.get(i).update( context )
-    }
-  }
-
-  appleTypes = {
-    // 0 - black/silver ; simple apple
-    // 1 - green
-    // 2 - red
-    0: {
-        color: "rgb(41, 41, 41)",
-        energy: 1
-      },
-    1: {
-        color: "rgb(62, 214, 54)",
-        energy: 2
-      },
-    2: {
-      color: "rgb(240, 9, 29)",
-      energy: 3
-    }
-  }
-
-  function Apple() {
-    this.x = getRandomPosition()
-    this.y = getRandomPosition()
-    this.type = Math.floor(Math.random() * (Math.floor(2) -  Math.ceil(0))) +  Math.ceil(0)
-  }
-
-  function Snake() {
-    this.length = 3
-    this.x = getRandomPosition()
-    this.y = getRandomPosition()
-    this.color = "rgb(4,102,38)"
-    this.direction = Math.floor(Math.random() * (Math.floor(3) -  Math.ceil(0))) +  Math.ceil(0)
-  }
-
-  function drawSnake(snake) {
-    canvas = document.getElementById('render-target')
-    if (canvas.getContext) {
-      var ctx = canvas.getContext("2d")
-
-      ctx.fillStyle = snake.color
-      ctx.fillRect (snake.x, snake.y, 15, 15)
-    }
-  }
-
-  function addNewApple( board ) {
-    var coordinates = {}
-    //...
-    var apple = new Apple()
-    drawApple( apple )
-
-  }
-
-  function drawApple( apple ) {
-
-    canvas = document.getElementById('render-target')
-    if (canvas.getContext) {
-      var ctx = canvas.getContext("2d")
-      ctx.fillStyle = appleTypes[apple.type].color
-      ctx.fillRect (apple.x, apple.y, 15, 15)
-    }
-  }
-
-
-  function getRandomPosition() {
-    return Math.round(Math.floor(1 + Math.random() * (600 - 1)) / 15) * 15
-  }
-
-  function User() {
-    this.level = 1
-    this.score = 0
-  }
-
-  function updateStatistics(user) {
-
-    document.getElementById('level').innerHTML = user.level
-    document.getElementById('score').innerHTML = user.score
-  }
-
-  function Init() {
-    this.snake = new Snake
-    this.user = new User()
-    drawSnake(this.snake)
-    addNewApple()
-  }
-  function clearBoard() {
-    canvas = document.getElementById('render-target')
-    if (canvas.getContext) {
+    function clearBoard() {
       var ctx = canvas.getContext("2d")
       ctx.clearRect(0, 0, 600, 600)
     }
+
+    function PointsList() {
+      this.list = []
+    }
+
+    function add( point ) {
+      return points.list.push( point )
+    }
+
+    function remove(point) {
+      return points.slice(indexOf(point), 1)
+    }
+
+    function indexOf (obj) {
+      return points.list.indexOf( obj )
+    }
+
+    function getRandomPosition() {
+      return { x: Math.round(Math.floor(1 + Math.random() * (600 - 1)) / 15) * 15,
+               y: Math.round(Math.floor(1 + Math.random() * (600 - 1)) / 15) * 15 }
+    }
+
+    function render() {
+      var ctx = canvas.getContext("2d")
+      ctx.fillStyle = "rgba(41, 41, 41, 0.7)"
+
+      points.list.forEach(function(p) {
+        ctx.fillRect(p.x, p.y, 15, 15)
+      })
+    }
+
+    function updateStatistics() {
+      document.querySelector('#level').innerHTML = this.level
+      document.querySelector('#score').innerHTML = this.score
+    }
+
+    return {
+      clear: clearBoard,
+      add: add,
+      render: render,
+      random: getRandomPosition,
+      indexOf: indexOf,
+      remove: remove,
+      level: level,
+      score: score,
+      updateStatistics: updateStatistics
+    }
   }
 
-  function Game() {
-    var game = new Init()
-    // while(1) {
-    setInterval(function() {
-      updateStatistics(game.user)
-      clearBoard()
-      drawSnake(game.snake)
-      addNewApple()
+  var Snake = function(board) {
+    var head = board.random()
+    var length = 3
+    var dir = Math.floor(Math.random() * (Math.floor(3) -  Math.ceil(0))) +  Math.ceil(0)
+      /*
+      0 - up
+      1 - right
+      2 - down
+      3 - left
+      */
+    document.addEventListener('keydown', function(event) {
+      switch(event.keyCode) {
+        case 38:
+          dir = 2
+          break
+        case 39:
+          dir = 1
+          break
+        case 40:
+          dir = 0
+          break
+        case 37:
+          dir = 3
+          break
+      }
+    }, true)
 
-    }, 3000)
-    // }
+    function motion() {
+      var tail = length + 1
+      var body = head
 
+      while (tail-- >= 1) {
+        board.add(body)
+      }
+
+      switch(dir) {
+        case 0:
+          head.y += 15
+          break
+        case 1:
+          head.x += 15
+          break
+        case 2:
+          head.y -= 15
+          break
+        case 3:
+          head.x -= 15
+          break
+      }
+
+      if ( head.x < 0 || head.x > 600 || head.y > 600 || head.y < 0 ) {
+        console.log("GAME OVER")
+        clearInterval(gameLoop)
+      }
+    }
+
+    return {
+      move: motion,
+      }
   }
 
-  Game()
+  var Apple = function(board) {
+    var position = board.random()
 
+    function newApple() {
+      while (board.indexOf( position ) !== -1 ) {
+        position = board.random()
+      }
+      board.add(position)
+    }
+    return {
+      new: newApple
+    }
+  }
+
+  var Game = (function() {
+    function start() {
+        var board = new Board()
+        var snake = new Snake(board)
+        var apple = new Apple(board).new()
+        var timeout = 100
+        console.log("Game started!")
+
+        gameLoop = setInterval((function() {
+          board.clear()
+          snake.move()
+          board.updateStatistics()
+          board.render()
+
+        }), Math.round(1000/timeout))
+    }
+
+    return {
+      start: start
+    }
+  })()
+
+  Game.start()
 
 })()
