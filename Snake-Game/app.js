@@ -4,9 +4,11 @@
 
     var canvas = document.querySelector('#render-target')
     var points = new PointsList()
+    var apples = new PointsList()
 
     var level = 1
     var score = 0
+    var timeout = 1
 
     function clearBoard() {
       var ctx = canvas.getContext("2d")
@@ -17,16 +19,40 @@
       this.list = []
     }
 
-    function add( point ) {
+    function addApple( point ) {
+      return apples.list.push( point )
+    }
+
+    function addPoint( point ) {
       return points.list.push( point )
     }
 
-    function remove(point) {
-      return points.slice(indexOf(point), 1)
+    function removeApple(point) {
+      return apples.list.splice(indexOfApple(point), 1)
+    }
+    function removePoint(point) {
+      return points.list.splice(indexOfPoint(point), 1)
     }
 
-    function indexOf (obj) {
-      return points.list.indexOf( obj )
+    function indexOfPoint (obj) {
+      var i = 0
+      while(i < points.list.length) {
+        if( points.list[i].x === obj.x && points.list[i].y === obj.y ) {
+          return i
+        }
+        i++
+      }
+      return -1
+    }
+    function indexOfApple (obj) {
+      var i = 0
+      while(i < apples.list.length) {
+        if( apples.list[i].x === obj.x && apples.list[i].y === obj.y ) {
+          return i
+        }
+        i++
+      }
+      return -1
     }
 
     function getRandomPosition() {
@@ -36,9 +62,14 @@
 
     function render() {
       var ctx = canvas.getContext("2d")
-      ctx.fillStyle = "rgba(41, 41, 41, 0.7)"
+      ctx.fillStyle = "rgb(41, 41, 41)"
 
       points.list.forEach(function(p) {
+        ctx.fillRect(p.x, p.y, 15, 15)
+      })
+
+      ctx.fillStyle = "rgb(245, 37, 0)"
+      apples.list.forEach(function(p) {
         ctx.fillRect(p.x, p.y, 15, 15)
       })
     }
@@ -46,18 +77,29 @@
     function updateStatistics() {
       document.querySelector('#level').innerHTML = this.level
       document.querySelector('#score').innerHTML = this.score
+      // if (this.score%100 === 0) {
+      //   this.level += 1
+      //   this.timeout += 1
+      // }
     }
 
+    function moreApples() {
+      return !apples.list.length
+    }
     return {
       clear: clearBoard,
-      add: add,
+      addPoint: addPoint,
+      addApple: addApple,
       render: render,
       random: getRandomPosition,
-      indexOf: indexOf,
-      remove: remove,
+      indexOfApple: indexOfApple,
+      indexOfPoint: indexOfPoint,
+      removePoint: removePoint,
+      removeApple: removeApple,
       level: level,
       score: score,
-      updateStatistics: updateStatistics
+      updateStatistics: updateStatistics,
+      moreApples: moreApples
     }
   }
 
@@ -90,10 +132,15 @@
 
     function motion() {
       var tail = length + 1
-      var body = head
+
+      if (board.indexOfApple(head) > -1) {
+        board.score = board.score + 15
+        console.log(head)
+        board.removeApple(head)
+      }
 
       while (tail-- >= 1) {
-        board.add(body)
+        board.addPoint(head)
       }
 
       switch(dir) {
@@ -119,17 +166,19 @@
 
     return {
       move: motion,
+      head: head
       }
   }
 
   var Apple = function(board) {
-    var position = board.random()
+    var position
 
     function newApple() {
-      while (board.indexOf( position ) !== -1 ) {
+      position = board.random()
+      while (board.indexOfApple( position ) > -1 ) {
         position = board.random()
       }
-      board.add(position)
+      board.addApple(position)
     }
     return {
       new: newApple
@@ -140,17 +189,18 @@
     function start() {
         var board = new Board()
         var snake = new Snake(board)
-        var apple = new Apple(board).new()
-        var timeout = 100
-        console.log("Game started!")
+        var apple = new Apple(board)
+        apple.new()
 
         gameLoop = setInterval((function() {
           board.clear()
           snake.move()
           board.updateStatistics()
           board.render()
-
-        }), Math.round(1000/timeout))
+          if (board.moreApples()) {
+            apple.new()
+          }
+        }), Math.round(1000/board.timeout))
     }
 
     return {
