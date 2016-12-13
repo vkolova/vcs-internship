@@ -1,0 +1,96 @@
+body {
+  margin: 0 auto;
+  max-width: 50em;
+  font-family: "Helvetica";
+  background-color: #e2e2e2;
+}
+
+.container {
+  width: 835px;
+  height: auto;
+  top: 25px;
+  margin: auto;
+  position: relative;
+  -webkit-box-shadow: 0px 0px 40px 0px rgba(185, 185, 185, 1);
+  -moz-box-shadow:    0px 0px 40px 0px rgba(185, 185, 185, 1);
+  box-shadow:         0px 0px 40px 0px rgba(185, 185, 185, 1);
+  z-index: 10;
+  /*border: 1px solid #b9b9b9;*/
+  padding: -30px;
+}
+
+.navbar {
+  width: auto;
+  background-color: #121314;
+  display: flex;
+}
+
+.navigation > ul {
+  list-style-type: none;
+  font-size: 11px;
+  display: flex;
+  color: white;
+}
+
+.navigation > ul > li {
+  padding-left: 15px;
+}
+
+
+.brand-image {
+  height: 45px;
+  color: #ffffff;
+  padding-left: 15px;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+.hero {
+  height: 260px;
+  width: 835px;
+  position: relative;
+  display: table;
+  overflow: hidden;
+  background-image: url("../images/1j_vfrmiohe-nathan-anderson.jpg");
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.hero-content {
+  color: #ffffff;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+.hero-content > h1 {
+    font-size: 43px;
+    padding: 0;
+    margin: 0;
+}
+
+.intro {
+  background-color: #EEE;
+  padding: 20px 20px 20px 20px;
+  text-align: center;
+}
+
+.intro-content {
+  display: inline-block;
+  position: relative;
+  width: 190px;
+  padding: 0px 25px 0px 25px;
+  /*border: 1px solid black;*/
+  text-align: left;
+}
+
+.intro-content > h5 {
+  padding: 0;
+  margin: 0;
+  color: #393b48;
+}
+
+.intro-content > p {
+  font-size: 11px;
+  color: #A1A1A1;
+}
