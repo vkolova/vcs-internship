@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Awesome";
+  src: url("../fonts/fontawesome-webfont.woff");
+}
+
 body {
   margin: 0 auto;
   max-width: 50em;
@@ -15,8 +20,7 @@ body {
   -moz-box-shadow:    0px 0px 40px 0px rgba(185, 185, 185, 1);
   box-shadow:         0px 0px 40px 0px rgba(185, 185, 185, 1);
   z-index: 10;
-  /*border: 1px solid #b9b9b9;*/
-  padding: -30px;
+  overflow: auto;
 }
 
 .navbar {
@@ -25,25 +29,78 @@ body {
   display: flex;
 }
 
-.navigation > ul {
-  list-style-type: none;
-  font-size: 11px;
-  display: flex;
-  color: white;
-}
-
-.navigation > ul > li {
+.navbar > .web {
+  font-size: 8px;
+  color: #A1A1A1;
   padding-left: 15px;
+  padding-top: 15px;
+  display: table-cell;
+  vertical-align: middle;
 }
 
+.navbar:before {
+    content:"";
+    position: absolute;
+    left: -6px;
+    width: 50%;
+    height: 16px;
+    top: 39px;
+    background-color: #ccc;
+
+
+    -webkit-transform: skew(-40deg);
+    -moz-transform: skew(-40deg);
+    -o-transform: skew(-40deg);
+    -ms-transform: skew(-40deg);
+    transform: skew(-40deg);
+}
+.navbar:after {
+    content:"";
+    position: absolute;
+    right: -6px;
+    width: 50%;
+    height: 16px;
+    top: 39px;
+    background-color: #ccc;
+
+
+    -webkit-transform: skew(40deg);
+    -moz-transform: skew(40deg);
+    -o-transform: skew(40deg);
+    -ms-transform: skew(40deg);
+    transform: skew(40deg);
+}
 
 .brand-image {
   height: 45px;
   color: #ffffff;
   padding-left: 15px;
+  padding-top: 10px;
   display: table-cell;
   vertical-align: middle;
   font-size: 20px;
+  font-weight: bold;
+}
+
+.navigation {
+  right: 0px;
+  float: right;
+}
+
+
+.navigation > a:hover, a:visited, a:link, a:active {
+   text-decoration: none;
+   color: #A1A1A1;
+}
+
+.navigation > ul {
+  list-style-type: none;
+  font-size: 11px;
+  display: flex;
+}
+
+.navigation > ul > li {
+  padding-left: 15px;
 }
 
 .hero {
@@ -51,10 +108,9 @@ body {
   width: 835px;
   position: relative;
   display: table;
-  overflow: hidden;
   background-image: url("../images/1j_vfrmiohe-nathan-anderson.jpg");
-  background-size: 100% 100%;
-  background-position: center;
+  background-size: cover;
+  background-position: center center;
 }
 
 .hero-content {
@@ -63,10 +119,36 @@ body {
   display: table-cell;
   vertical-align: middle;
 }
+
+.hero-content > p {
+  padding: 0;
+  margin: 0;
+}
+
 .hero-content > h1 {
     font-size: 43px;
     padding: 0;
     margin: 0;
+}
+
+.icon {
+  font-family: "Awesome";
+  color: #393b48;
+}
+
+.intro-content > .icon {
+  font-size: 11px;
+  position: relative;
+  display: inline;
+  float: right;
+  padding-top: 6px;
+}
+
+.feature-content > .icon {
+  font-size: 17px;
+  position: relative;
+  display: inline;
+  padding: 5px 5px 5px 5px;
 }
 
 .intro {
@@ -80,7 +162,6 @@ body {
   position: relative;
   width: 190px;
   padding: 0px 25px 0px 25px;
-  /*border: 1px solid black;*/
   text-align: left;
 }
 
@@ -88,9 +169,81 @@ body {
   padding: 0;
   margin: 0;
   color: #393b48;
+  display: inline;
+  font-weight: bold;
 }
 
 .intro-content > p {
   font-size: 11px;
   color: #A1A1A1;
+}
+
+.feature-list {
+  padding: 40px 20px 0px 0px;
+  text-align: center;
+  background: -webkit-linear-gradient(#ffffff, #ececec);
+  background: -o-linear-gradient(#ffffff, #ececec);
+  background: -moz-linear-gradient(#ffffff, #ececec);
+  background: linear-gradient(#ffffff, #ececec);
+  overflow: auto;
+}
+
+.feature-list > img {
+  width: 60%;
+  height: auto;
+  float: left;
+}
+
+.features {
+  float: right;
+}
+
+.feature-content {
+  text-align: left;
+  display: block;
+  width: 250px;
+  height: auto;
+  padding: 20px 25px 0px 25px;
+}
+
+.feature-content > h5 {
+  position: relative;
+  display: inline;
+  color: #393b48;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-content > p {
+  font-size: 11px;
+  color: #A1A1A1;
+  display: block;
+  padding: 8px;
+  margin: 0;
+}
+
+.features > button {
+  background-color: #00aed7;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 3px 5px 3px 5px;
+  font-size: 11px;
+  float: right;
+  margin-right: 60px;
+}
+
+.footer {
+  font-size: 8px;
+  position: relative;
+  padding-top: 15px;
+}
+
+.footer > .support {
+  float: right;
+}
+
+.firstsite {
+  max-height: 15px;
+  width: auto;
 }
