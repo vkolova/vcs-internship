@@ -19,74 +19,82 @@ body {
   -webkit-box-shadow: 0px 0px 40px 0px rgba(185, 185, 185, 1);
   -moz-box-shadow:    0px 0px 40px 0px rgba(185, 185, 185, 1);
   box-shadow:         0px 0px 40px 0px rgba(185, 185, 185, 1);
-  z-index: 10;
-  overflow: auto;
+
+  overflow: hidden;
 }
 
 .navbar {
   width: auto;
-  background-color: #121314;
-  display: flex;
+  display: block;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 8px;
+  background: transparent;
+  position: relative;
 }
 
 .navbar > .web {
-  font-size: 8px;
+  font-size: 9px;
   color: #A1A1A1;
-  padding-left: 15px;
-  padding-top: 15px;
-  display: table-cell;
+  padding-left: 35px;
+  padding-top: 5px;
   vertical-align: middle;
+  display: inline;
+  position: relative;
+  z-index: 10;
 }
 
 .navbar:before {
     content:"";
     position: absolute;
-    left: -6px;
-    width: 50%;
-    height: 16px;
-    top: 39px;
-    background-color: #ccc;
-
-
-    -webkit-transform: skew(-40deg);
-    -moz-transform: skew(-40deg);
-    -o-transform: skew(-40deg);
-    -ms-transform: skew(-40deg);
-    transform: skew(-40deg);
+    left: -23px;
+    width: 90px;
+    height: 50px;
+    top: 0px;
+    background-color: #121314;
+    -webkit-transform: skew(-45deg);
+    -moz-transform: skew(-45deg);
+    -o-transform: skew(-45deg);
+    -ms-transform: skew(-45deg);
+    transform: skew(-45deg);
+    z-index: 0;
 }
+
 .navbar:after {
     content:"";
     position: absolute;
-    right: -6px;
-    width: 50%;
-    height: 16px;
-    top: 39px;
-    background-color: #ccc;
-
-
-    -webkit-transform: skew(40deg);
-    -moz-transform: skew(40deg);
-    -o-transform: skew(40deg);
-    -ms-transform: skew(40deg);
-    transform: skew(40deg);
+    right: -18px;
+    width: 825px;
+    height: 50px;
+    top: 0px;
+    background-color: #121314;
+    -webkit-transform: skew(45deg);
+    -moz-transform: skew(45deg);
+    -o-transform: skew(45deg);
+    -ms-transform: skew(45deg);
+    transform: skew(45deg);
+    z-index: 0;
 }
 
 .brand-image {
-  height: 45px;
   color: #ffffff;
   padding-left: 15px;
-  padding-top: 10px;
-  display: table-cell;
+  padding-top: 2px;
   vertical-align: middle;
   font-size: 20px;
   font-weight: bold;
+  display: inline;
+  position: relative;
+  z-index: 10;
 }
 
 .navigation {
-  right: 0px;
   float: right;
+  position: relative;
+  display: inline;
+  z-index: 10;
+  font-size: 10px;
 }
-
 
 .navigation > a:hover, a:visited, a:link, a:active {
    text-decoration: none;
@@ -95,7 +103,6 @@ body {
 
 .navigation > ul {
   list-style-type: none;
-  font-size: 11px;
   display: flex;
 }
 
@@ -103,14 +110,18 @@ body {
   padding-left: 15px;
 }
 
-.hero {
-  height: 260px;
-  width: 835px;
-  position: relative;
-  display: table;
+header {
   background-image: url("../images/1j_vfrmiohe-nathan-anderson.jpg");
   background-size: cover;
   background-position: center center;
+  z-index: -99999;
+}
+
+.hero {
+  height: 265px;
+  width: 835px;
+  top: 50px;
+  display: table;
 }
 
 .hero-content {
@@ -155,6 +166,8 @@ body {
   background-color: #EEE;
   padding: 20px 20px 20px 20px;
   text-align: center;
+  position: relative;
+  display: block;
 }
 
 .intro-content {
@@ -185,7 +198,7 @@ body {
   background: -o-linear-gradient(#ffffff, #ececec);
   background: -moz-linear-gradient(#ffffff, #ececec);
   background: linear-gradient(#ffffff, #ececec);
-  overflow: auto;
+  overflow: hidden;
 }
 
 .feature-list > img {
@@ -196,6 +209,7 @@ body {
 
 .features {
   float: right;
+  overflow: hidden;
 }
 
 .feature-content {
@@ -203,7 +217,7 @@ body {
   display: block;
   width: 250px;
   height: auto;
-  padding: 20px 25px 0px 25px;
+  padding: 15px 25px 0px 5px;
 }
 
 .feature-content > h5 {
@@ -231,19 +245,41 @@ body {
   font-size: 11px;
   float: right;
   margin-right: 60px;
+  margin-top: 20px;
 }
 
 .footer {
-  font-size: 8px;
+  height: 30px;
+  width: auto;
+  font-size: 9px;
   position: relative;
-  padding-top: 15px;
+  padding-top: 35px;
+  display: block;
+  color: #9E9E9E;
+  font-weight: bold;
+}
+
+.footer > .copyright {
+  position: relative;
+  height: 15px;
+  padding-left: 28px;
+  padding-top: 10px;
+  display: inline-block;
 }
 
 .footer > .support {
   float: right;
+  height: 20px;
+  display: flex;
+  padding-top: 5px;
 }
 
-.firstsite {
-  max-height: 15px;
-  width: auto;
+.support > span {
+  padding-right:  5px;
+  padding-top: 5px;
+}
+
+.support > img {
+  padding-right: 5px;
+
 }
