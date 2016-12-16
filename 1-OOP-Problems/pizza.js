@@ -16,14 +16,20 @@ function PizzaOrder(pizza) {
     return this.id
   }
 
-  this.ready = function() {
+  this.ready = function(callback) {
+    this.callback = callback;
   }
 
   this.start = function() {
-    setTimeout(this.ready(), this.pizza.timeToMake)
+    var self = this;
+    setTimeout(function () { self.callback(self.pizza, self) }, this.pizza.timeToMake)
   }
 }
 
 var pizza = new Pizza("Peperoni", 100 /*cost*/, 2000 /*timeToMake in ms = 2 seconds */)
 
 var order = new PizzaOrder(pizza)
+order.ready(function(p, o) {
+  console.log(o.getId())
+})
+order.start()
