@@ -3,8 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>momentum</title>
+
+    <script type='text/javascript' src='js/knockout-3.4.1.js'></script>
     <link rel="stylesheet" href="css/styles.css">
   </head>
+
   <body>
     <div class="container">
       <header>
@@ -16,12 +19,8 @@
           <span class="web">@momentumhq</span>
 
           <div class="navigation">
-            <ul>
-              <li><a href="#">about</a></li>
-              <li><a href="#">method</a></li>
-              <li><a href="#">work</a></li>
-              <li><a href="#">contact</a></li>
-              <li><a href="#">blog</a></li>
+            <ul data-bind="foreach: navigation">
+              <li><a href="#" data-bind="text: $data" ></a></li>
             </ul>
           </div>
           </div>
@@ -37,21 +36,11 @@
         </header>
 
 
-      <section class="intro">
+      <section class="intro" data-bind="foreach: intro">
         <div class="intro-content">
-          <h5>Who we are</h5>
+          <h5 data-bind="text: h"></h5>
           <span class="icon">&#xf138;</span>
-          <p>A team of design lovers with a special way of doing things.</p>
-        </div>
-        <div class="intro-content">
-          <h5>Our work</h5>
-          <span class="icon">&#xf138;</span>
-          <p>We love what we do and we believe it shines through in the results.</p>
-        </div>
-        <div class="intro-content">
-          <h5>Our location</h5>
-          <span class="icon">&#xf138;</span>
-          <p>South east of the UK, a mere stone's throw away from London.</p>
+          <p data-bind="text: p"></p>
         </div>
       </section>
 
@@ -60,20 +49,10 @@
 
         <div class="features">
 
-            <div class="feature-content">
-              <span class="icon">&#xf1fc;</span>
-              <h5>Web design</h5>
-              <p>We create completely bespoke, striking designs that work alongside your brand to engage and enthral your audiennce. Clarity is key.</p>
-            </div>
-            <div class="feature-content">
-              <span class="icon">&#xf0c3;</span>
-              <h5>Web development</h5>
-              <p>We integrate edge content managment and e-commenrce system, develop mobile applications and other technical stuff.</p>
-            </div>
-            <div class="feature-content">
-              <span class="icon">&#xf278;</span>
-              <h5>Content Strategy</h5>
-              <p>We take the time to understand what it is you want to say and help you develop copy that is engaging and informative.</p>
+            <div class="feature-content" data-bind="foreach: features">
+              <span class="icon" data-bind="text: icon"></span>
+              <h5 data-bind="text: h"></h5>
+              <p data-bind="text: p"></p>
             </div>
 
             <button type="button" name="button">Read more</button>
@@ -91,6 +70,8 @@
         <img src="images/openroad.jpg" alt="openroad">
       </div>
     </div>
+
+    <script src="js/index.js"></script>
 
   </body>
 </html>
