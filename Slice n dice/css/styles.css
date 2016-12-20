@@ -34,6 +34,10 @@ body {
     z-index: 10;
   }
 
+  .navigation {
+    float: none;
+  }
+
   .hero {
     width: 100%;
   }
@@ -69,26 +73,39 @@ body {
     margin-top: 40px;
   }
 
-  .menu ul.active {
-    display:none;
-  }
 
   .toggle-nav {
+    float: right;
     display: inline;
     font-size: 25px;
     padding-right: 20px;
   }
 
-  /*.menu {
-    background:#121314;
+  nav ul {
+    display: none;
   }
-  .menu li:last-child {
-    margin-right:0px;
-  }*/
-  /*.active {
-    background-color: #ffffff;
-    font-size: 15px;
-  }*/
+
+  ul {
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    width: 100%;
+    background-color: #121314;
+    float: left;
+  }
+  li {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    font-size: 12px;
+  }
+
+  li:hover {
+    background-color: #222;
+  }
+
 }
 
 @media screen and (min-width: 900px) {
@@ -109,8 +126,13 @@ body {
     padding-top: 8px;
   }
 
+  .navigation {
+    float: right;
+  }
+
   .navigation > ul {
     display: flex;
+    padding: 0;
   }
 
   .navigation > ul > li {
@@ -184,6 +206,8 @@ body {
 
 }
 
+
+
 .container {
   height: auto;
   margin: auto;
@@ -225,7 +249,6 @@ body {
 }
 
 .navigation {
-  float: right;
   position: relative;
   display: inline;
   z-index: 10;
