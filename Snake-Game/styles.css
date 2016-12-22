@@ -3,6 +3,7 @@ body {
   max-width: 50em;
   background-color: #424242;
   font-family: "Arial", sans-serif;
+
 }
 
 h1 {
@@ -12,9 +13,10 @@ h1 {
 }
 
 #render-target {
-  background-color: #C2C2C2;
+  background-color: #000000;
   border: 1px solid #00b4e0;
-  top: 100px;
+  top: 90px;
+  left: 100px;
   position: fixed;
 }
 
@@ -22,8 +24,6 @@ h1 {
   top: 100px;
   right: 150px;
   position: fixed;
-  background-color: #E3E3E3;
-  border: 1px solid #57B3F0;
   color: #36d7ff;
   padding: 15px;
   height: 60px;
@@ -31,12 +31,10 @@ h1 {
 }
 
 #game {
-  top: 200px;
-  right: 150px;
+  top: 45%;
+  left: 30%;
   position: fixed;
-  color: #BF0D3A;
-  font-size: 28px;
-  padding: 15px;
-  height: 60px;
-  width: 200px;
+  color: rgba(191,13,58, 0.9);
+  font-size: 72px;
+  width: 100%;
 }
