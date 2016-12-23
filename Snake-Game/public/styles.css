@@ -1,0 +1,50 @@
+body {
+  margin: 0 auto;
+  background-color: #0a0a0a;
+  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+}
+
+h1 {
+  color: #36d7ff;
+  border-left: 1px solid #36d7ff;
+  padding-left: 15px;
+}
+
+#render-target {
+  background-color: #ababab;
+  border: 1px solid #00b4e0;
+  margin: 0 auto;
+  position: absolute;
+  top: 15px;
+}
+
+.statistics {
+  top: 100px;
+  right: 150px;
+  position: fixed;
+  color: #36d7ff;
+  padding: 15px;
+  height: 60px;
+  width: 200px;
+  display: none;
+}
+
+#game-status {
+  top: 45%;
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+}
+
+#game-status span {
+  font-size: 36px;
+  text-transform: uppercase;
+}
+
+#game-status p {
+  font-size: 24px;
+}
