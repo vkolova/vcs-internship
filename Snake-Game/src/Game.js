@@ -3,7 +3,7 @@ var Game = (board, apple, snake) => {
   let events = {}
 
   var score = 0
-  var fps = 5
+  var fps = 10
   var $score = document.querySelector('#score')
   var $gameStatus = document.querySelector('#game-status')
 
@@ -16,8 +16,8 @@ var Game = (board, apple, snake) => {
     delete events[eventName]
   }
 
-  var fire = (eventName) => {
-    events[eventName].forEach((e) => e())
+  var fire = (eventName, data) => {
+    events[eventName].forEach((e) => e(data))
   }
 
 
@@ -42,7 +42,8 @@ var Game = (board, apple, snake) => {
 
   }
   return {
-    on, init, fire
+    on, init, fire,
+    score, fps
   }
 
 }

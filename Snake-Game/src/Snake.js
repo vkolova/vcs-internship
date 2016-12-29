@@ -12,8 +12,8 @@ var Snake = (board, length = 5, dir = "right") => {
     delete events[eventName]
   }
 
-  var fire = (eventName) => {
-    events[eventName].forEach((e) => e())
+  var fire = (eventName, data) => {
+    events[eventName].forEach((e) => e(data))
   }
 
   var handleDirection = (e) => {
@@ -27,6 +27,15 @@ var Snake = (board, length = 5, dir = "right") => {
     if(key) e.preventDefault()
   }
 
+  var move = (dir, head) => {
+    if (dir == "right") head.x++
+    else if (dir == "left") head.x--
+    else if (dir == "up") head.y--
+    else if (dir == "down") head.y++
+
+    return head
+  }
+
   var init = () => {
     on("INIT", () => {
       for (var i = length - 1; i >= 0; i--) {
@@ -37,35 +46,68 @@ var Snake = (board, length = 5, dir = "right") => {
     })
 
     on("MOVE", () => {
-
-      var head = {x: snake[0].x, y: snake[0].y}
-      var color = "rgb(0,180,224)"
+      var head = {x: snake[0].x, y: snake[0].y, color}
 
       document.onkeydown = handleDirection
-
-      if (dir == "right") head.x++
-      else if (dir == "left") head.x--
-      else if (dir == "up") head.y--
-      else if (dir == "down") head.y++
+      move(dir, head)
 
       var tail = snake.pop()
       board.remove(tail)
 
       tail.x = head.x
       tail.y = head.y
-      snake.unshift({x: head.x, y: head.y})
+      tail.color = color
 
-      board.add({x: head.x, y: head.y})
+      snake.unshift(tail)
+      board.add(tail)
 
-      var head = {x: tail.x, y: tail.y}
-
+      var head = tail
       if ( head.x < 0 || head.x*board.squareW > board.boardW || head.y*board.squareH > board.boardH || head.y < 0 ) {
         fire("GAME_OVER")
       }
 
-      
+      let apples = board.getApples()
+      console.log(`apples: ${apples.length}`)
+
+      if (apples.length > 0) {
+        apples.forEach((a) => {
+          if (a.x === head.x && a.y === head.y) {
+            fire("COLLISION", { head, apple: a })
+          }
+        })
+      }
+
+      if (snake.indexOf(head) !== 0) fire("GAME_OVER")
+
     })
 
+    on("SHORTEN", () => {
+      var tail = snake.pop()
+      board.remove(tail)
+    })
+
+    on("GROW", (point) => {
+      snake.unshift(point)
+    })
+
+    on("COLLISION", (data) => {
+      console.log("!!")
+      fire("NEW_APPLE")
+
+      let tail = data.head
+      let apple = data.apple
+      board.remove(apple)
+
+      snake.length += apple.length
+      if (snake.length === 0) fire("GAME_OVER")
+
+      if (apple.length === -1) fire("SHORTEN")
+      else fire("GROW", tail)
+      board.fps += apple.fps
+
+      board.handleScore()
+
+    })
 
     on("GAME_OVER", () => {
       console.log("game over")
@@ -76,12 +118,11 @@ var Snake = (board, length = 5, dir = "right") => {
       clearInterval(window.gameLoop)
     })
 
-
     fire("INIT")
 
   }
   return {
-    init, fire, dir
+    init, fire, dir, length
   }
 }
 

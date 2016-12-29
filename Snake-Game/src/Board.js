@@ -56,13 +56,18 @@ var Board = () => {
   }
 
   var add = (point) => {
-    return points.push({x: point.x, y: point.y})
+    return points.push(point)
   }
 
   var remove = (point) => {
-    return points.splice(indexOff({x: point.x, y: point.y}), 1)
+   return points.splice(indexOff({x: point.x, y: point.y}), 1)
   }
 
+  var getApples = () => {
+    return points.filter((p) => {
+      return p.hasOwnProperty("score")
+    })
+  }
 
 
   var init = () => {
@@ -72,8 +77,8 @@ var Board = () => {
     })
 
     on("RENDER", () => {
-
       points.forEach((p) => {
+        // console.log(p)
         ctx.fillStyle = p.color
         ctx.fillRect(p.x*squareW, p.y*squareH, squareW, squareH)
 
@@ -102,8 +107,8 @@ var Board = () => {
     init, fire,
     getCoordinates,
     squareW, squareH,
-    boardW, boardH, add, remove
-
+    boardW, boardH, add, remove,
+    getApples: getApples
   }
 }
 

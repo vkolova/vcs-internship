@@ -91,7 +91,7 @@
 	});
 	var Apple = function Apple(board) {
 	  var apples = [];
-	  var fruits = [{ score: 5, color: "#F71850", length: 1, timeout: 1 }, { score: 10, color: "#22F253", length: 1, timeout: 1 }, { score: 15, color: "#F0D524", length: 1, timeout: 3 }, { score: 0, color: "#8CBFD1", length: -1, timeout: -1 }, { score: -15, color: "#F0AC24", length: -1, timeout: 1 }];
+	  var fruits = [{ score: 5, color: "#F71850", length: 1, fps: 1 }, { score: 10, color: "#22F253", length: 1, fps: 1 }, { score: 15, color: "#F0D524", length: 1, fps: 3 }, { score: 0, color: "#8CBFD1", length: -1, fps: -1 }, { score: -15, color: "#F0AC24", length: -1, fps: 1 }];
 	  var events = {};
 
 	  var on = function on(eventName, callback) {
@@ -110,8 +110,9 @@
 	  };
 
 	  var init = function init() {
-	    on("INIT", function () {
+	    on("NEW_APPLE", function () {
 	      console.log("Apple initialized");
+
 	      var pos = board.getCoordinates();
 
 	      var apple = fruits[Math.floor(Math.random() * fruits.length)];
@@ -122,13 +123,7 @@
 	      board.fire("ADD", apple);
 	    });
 
-	    on("COLLISION", function () {
-	      // let eaten = apple.pop()
-	      // board.fire("DELETE", eaten)
-	      console.log("COLLIOSIOn");
-	    });
-
-	    fire("INIT");
+	    fire("NEW_APPLE");
 	  };
 	  return {
 	    init: init, fire: fire
@@ -206,11 +201,17 @@
 	  };
 
 	  var add = function add(point) {
-	    return points.push({ x: point.x, y: point.y });
+	    return points.push(point);
 	  };
 
 	  var remove = function remove(point) {
 	    return points.splice(indexOff({ x: point.x, y: point.y }), 1);
+	  };
+
+	  var getApples = function getApples() {
+	    return points.filter(function (p) {
+	      return p.hasOwnProperty("score");
+	    });
 	  };
 
 	  var init = function init() {
@@ -220,8 +221,8 @@
 	    });
 
 	    on("RENDER", function () {
-
 	      points.forEach(function (p) {
+	        // console.log(p)
 	        ctx.fillStyle = p.color;
 	        ctx.fillRect(p.x * squareW, p.y * squareH, squareW, squareH);
 
@@ -249,8 +250,8 @@
 	    init: init, fire: fire,
 	    getCoordinates: getCoordinates,
 	    squareW: squareW, squareH: squareH,
-	    boardW: boardW, boardH: boardH, add: add, remove: remove
-
+	    boardW: boardW, boardH: boardH, add: add, remove: remove,
+	    getApples: getApples
 	  };
 	};
 
@@ -282,9 +283,9 @@
 	    delete events[eventName];
 	  };
 
-	  var fire = function fire(eventName) {
+	  var fire = function fire(eventName, data) {
 	    events[eventName].forEach(function (e) {
-	      return e();
+	      return e(data);
 	    });
 	  };
 
@@ -304,6 +305,12 @@
 	    if (key) e.preventDefault();
 	  };
 
+	  var move = function move(dir, head) {
+	    if (dir == "right") head.x++;else if (dir == "left") head.x--;else if (dir == "up") head.y--;else if (dir == "down") head.y++;
+
+	    return head;
+	  };
+
 	  var init = function init() {
 	    on("INIT", function () {
 	      for (var i = length - 1; i >= 0; i--) {
@@ -314,28 +321,64 @@
 	    });
 
 	    on("MOVE", function () {
-
-	      var head = { x: snake[0].x, y: snake[0].y };
-	      var color = "rgb(0,180,224)";
+	      var head = { x: snake[0].x, y: snake[0].y, color: color };
 
 	      document.onkeydown = handleDirection;
-
-	      if (dir == "right") head.x++;else if (dir == "left") head.x--;else if (dir == "up") head.y--;else if (dir == "down") head.y++;
+	      move(dir, head);
 
 	      var tail = snake.pop();
 	      board.remove(tail);
 
 	      tail.x = head.x;
 	      tail.y = head.y;
-	      snake.unshift({ x: head.x, y: head.y });
+	      tail.color = color;
 
-	      board.add({ x: head.x, y: head.y });
+	      snake.unshift(tail);
+	      board.add(tail);
 
-	      var head = { x: tail.x, y: tail.y };
-
+	      var head = tail;
 	      if (head.x < 0 || head.x * board.squareW > board.boardW || head.y * board.squareH > board.boardH || head.y < 0) {
 	        fire("GAME_OVER");
 	      }
+
+	      var apples = board.getApples();
+	      console.log("apples: " + apples.length);
+
+	      if (apples.length > 0) {
+	        apples.forEach(function (a) {
+	          if (a.x === head.x && a.y === head.y) {
+	            fire("COLLISION", { head: head, apple: a });
+	          }
+	        });
+	      }
+
+	      if (snake.indexOf(head) !== 0) fire("GAME_OVER");
+	    });
+
+	    on("SHORTEN", function () {
+	      var tail = snake.pop();
+	      board.remove(tail);
+	    });
+
+	    on("GROW", function (point) {
+	      snake.unshift(point);
+	    });
+
+	    on("COLLISION", function (data) {
+	      console.log("!!");
+	      fire("NEW_APPLE");
+
+	      var tail = data.head;
+	      var apple = data.apple;
+	      board.remove(apple);
+
+	      snake.length += apple.length;
+	      if (snake.length === 0) fire("GAME_OVER");
+
+	      if (apple.length === -1) fire("SHORTEN");else fire("GROW", tail);
+	      board.fps += apple.fps;
+
+	      board.handleScore();
 	    });
 
 	    on("GAME_OVER", function () {
@@ -350,7 +393,7 @@
 	    fire("INIT");
 	  };
 	  return {
-	    init: init, fire: fire, dir: dir
+	    init: init, fire: fire, dir: dir, length: length
 	  };
 	};
 
@@ -370,7 +413,7 @@
 	  var events = {};
 
 	  var score = 0;
-	  var fps = 5;
+	  var fps = 10;
 	  var $score = document.querySelector('#score');
 	  var $gameStatus = document.querySelector('#game-status');
 
@@ -383,9 +426,9 @@
 	    delete events[eventName];
 	  };
 
-	  var fire = function fire(eventName) {
+	  var fire = function fire(eventName, data) {
 	    events[eventName].forEach(function (e) {
-	      return e();
+	      return e(data);
 	    });
 	  };
 
@@ -407,7 +450,8 @@
 	    fire("INIT");
 	  };
 	  return {
-	    on: on, init: init, fire: fire
+	    on: on, init: init, fire: fire,
+	    score: score, fps: fps
 	  };
 	};
 
