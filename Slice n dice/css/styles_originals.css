@@ -1,0 +1,426 @@
+/* Main Content ----------------------------- */
+
+@font-face {
+  font-family: "Awesome";
+  src: url("../fonts/fontawesome-webfont.woff");
+}
+
+body {
+  font-family: "Helvetica";
+  background-color: #e2e2e2;
+}
+
+/* Responsiveness ----------------------------- */
+
+@viewport {
+  width: device-width;
+  zoom: 1;
+}
+
+
+@media screen and (min-width: 200px)  {
+  body {
+    margin: 0 auto;
+  }
+  .container {
+    width: 100%;
+    top: 0;
+  }
+
+  .navbar {
+    display: block;
+    height: 35px;
+    background-color: #121314;
+    z-index: 10;
+  }
+
+  .navigation {
+    float: none;
+  }
+
+  .hero {
+    width: 100%;
+  }
+
+  .feature-list > img {
+    max-width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .features {
+    overflow: unset;
+    padding: 20px 20px 20px 40px;
+  }
+
+  .hero {
+    height: 265px;
+    width: 100%;
+    top: 10px;
+  }
+
+  .intro-content {
+    width: 90%;
+    padding: 10px 25px 0px 25px;
+  }
+
+  .feature-content {
+    width: 90%;
+    padding: 10px 25px 0px 25px;
+  }
+
+  .features > button {
+    margin-top: 40px;
+  }
+
+
+  .toggle-nav {
+    float: right;
+    display: inline;
+    font-size: 25px;
+    padding-right: 20px;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  ul {
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    width: 100%;
+    background-color: #121314;
+    float: left;
+  }
+  li {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    font-size: 12px;
+  }
+
+  li:hover {
+    background-color: #222;
+  }
+
+}
+
+@media screen and (min-width: 900px) {
+  body {
+    margin: 0 auto;
+    max-width: 50em;
+  }
+
+  .container {
+    width: 835px;
+    top: 25px;
+  }
+
+  .navbar {
+    display: block;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 8px;
+  }
+
+  .navigation {
+    float: right;
+  }
+
+  .navigation > ul {
+    display: flex;
+    padding: 0;
+  }
+
+  .navigation > ul > li {
+    padding-left: 15px;
+  }
+
+  .navbar:before {
+      content:"";
+      position: absolute;
+      left: -23px;
+      width: 90px;
+      height: 50px;
+      top: 0px;
+      background-color: #121314;
+      -webkit-transform: skew(-45deg);
+      -moz-transform: skew(-45deg);
+      -o-transform: skew(-45deg);
+      -ms-transform: skew(-45deg);
+      transform: skew(-45deg);
+      z-index: 0;
+  }
+
+  .navbar:after {
+      content:"";
+      position: absolute;
+      right: -18px;
+      width: 825px;
+      height: 50px;
+      top: 0px;
+      background-color: #121314;
+      -webkit-transform: skew(45deg);
+      -moz-transform: skew(45deg);
+      -o-transform: skew(45deg);
+      -ms-transform: skew(45deg);
+      transform: skew(45deg);
+      z-index: 0;
+  }
+  .hero {
+    height: 265px;
+    width: 835px;
+    top: 50px;
+  }
+
+  .intro-content {
+    width: 190px;
+    padding: 0px 25px 0px 25px;
+  }
+
+  .features {
+    overflow: hidden;
+  }
+
+  .feature-list > img {
+    width: 60%;
+  }
+
+  .feature-content {
+    width: 250px;
+    padding: 15px 25px 0px 5px;
+  }
+
+  .features > button {
+    float: right;
+    margin-right: 60px;
+    margin-top: 20px;
+  }
+
+  .toggle-nav {
+    display: none;
+  }
+
+}
+
+
+
+.container {
+  height: auto;
+  margin: auto;
+  position: relative;
+  -webkit-box-shadow: 0px 0px 40px 0px rgba(185, 185, 185, 1);
+  -moz-box-shadow: 0px 0px 40px 0px rgba(185, 185, 185, 1);
+  box-shadow: 0px 0px 40px 0px rgba(185, 185, 185, 1);
+  overflow: hidden;
+}
+
+/* Header ----------------------------- */
+
+.navbar {
+  width: auto;
+  position: relative;
+}
+
+.navbar > .web {
+  font-size: 9px;
+  color: #A1A1A1;
+  padding-left: 35px;
+  padding-top: 5px;
+  vertical-align: middle;
+  display: inline;
+  position: relative;
+  z-index: 10;
+}
+
+.brand-image {
+  color: #ffffff;
+  padding-left: 15px;
+  padding-top: 2px;
+  vertical-align: middle;
+  font-size: 20px;
+  font-weight: bold;
+  display: inline;
+  position: relative;
+  z-index: 10;
+}
+
+.navigation {
+  position: relative;
+  display: inline;
+  z-index: 10;
+  font-size: 10px;
+}
+
+.navigation > ul {
+  list-style-type: none;
+}
+
+.navigation > a:hover, a:visited, a:link, a:active {
+   text-decoration: none;
+   color: #A1A1A1;
+}
+
+header {
+  background-image: url("../images/1j_vfrmiohe-nathan-anderson.jpg");
+  background-size: cover;
+  background-position: center center;
+  z-index: -99999;
+}
+
+.hero {
+  display: table;
+}
+
+.hero-content {
+  color: #ffffff;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.hero-content > p {
+  padding: 0;
+  margin: 0;
+}
+
+.hero-content > h1 {
+    font-size: 43px;
+    padding: 0;
+    margin: 0;
+}
+
+.icon {
+  font-family: "Awesome";
+  color: #393b48;
+}
+
+.intro-content > .icon {
+  font-size: 11px;
+  position: relative;
+  display: inline;
+  float: right;
+  padding-top: 6px;
+}
+
+.feature-content > .icon {
+  font-size: 17px;
+  position: relative;
+  display: inline;
+  padding: 5px 5px 5px 5px;
+}
+
+.intro {
+  background-color: #EEE;
+  padding: 20px 20px 20px 20px;
+  text-align: center;
+  position: relative;
+  display: block;
+}
+
+.intro-content {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}
+
+.intro-content > h5 {
+  padding: 0;
+  margin: 0;
+  color: #393b48;
+  display: inline;
+  font-weight: bold;
+}
+
+.intro-content > p {
+  font-size: 11px;
+  color: #A1A1A1;
+}
+
+.feature-list {
+  padding: 40px 20px 0px 0px;
+  text-align: center;
+  background: -webkit-linear-gradient(#ffffff, #ececec);
+  background: -o-linear-gradient(#ffffff, #ececec);
+  background: -moz-linear-gradient(#ffffff, #ececec);
+  background: linear-gradient(#ffffff, #ececec);
+  overflow: hidden;
+}
+
+.feature-list > img {
+  height: auto;
+  float: left;
+}
+
+
+.feature-content {
+  text-align: left;
+  display: block;
+  height: auto;
+}
+
+.feature-content > h5 {
+  position: relative;
+  display: inline;
+  color: #393b48;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-content > p {
+  font-size: 11px;
+  color: #A1A1A1;
+  display: block;
+  padding: 8px;
+  margin: 0;
+}
+
+.features > button {
+  background-color: #00aed7;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 3px 5px 3px 5px;
+  font-size: 11px;
+}
+
+/* Footer ----------------------------- */
+
+.footer {
+  height: 30px;
+  width: auto;
+  font-size: 9px;
+  position: relative;
+  padding-top: 35px;
+  display: block;
+  color: #9E9E9E;
+  font-weight: bold;
+}
+
+.footer > .copyright {
+  position: relative;
+  height: 15px;
+  padding-left: 28px;
+  padding-top: 10px;
+  display: inline-block;
+}
+
+.footer > .support {
+  float: right;
+  height: 20px;
+  display: flex;
+  padding-top: 5px;
+}
+
+.support > span {
+  padding-right:  5px;
+  padding-top: 5px;
+}
+
+.support > img {
+  padding-right: 5px;
+
+}
