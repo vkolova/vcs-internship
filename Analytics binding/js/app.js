@@ -1,8 +1,9 @@
 ko.bindingHandlers.analytics = {
   init: (element, valueAccessor, allBindings) => {
-    jQuery( ".send-info" ).on( "click mouseover", (evn) => {
+    var value = valueAccessor()
 
-      var value = valueAccessor()
+    jQuery( element).on( value.event, (evn) => {
+
       var gaObj = (typeof value === 'object' && !(value instanceof Array))
 
       if (gaObj) {
@@ -18,6 +19,7 @@ ko.bindingHandlers.analytics = {
         if (value.value === parseInt(value.value, 10)) data.eventValue = parseInt(value.value, 10)
         else if (value.value === true || value.value === 'true') data.eventValue = 1
         else if (value.value === false || value.value === 'false') data.eventValue = 0
+        else throw new TypeError("eventValue is not valid")
 
         // ga('send', data)
         console.log("ga('send', ", data, ")")
@@ -31,9 +33,7 @@ AppViewModel = () => {
   var self = this
 }
 
-
 ko.applyBindings(AppViewModel())
-
 
 
 /*
