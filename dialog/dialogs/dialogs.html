@@ -1,0 +1,259 @@
+{% load i18n %}
+
+
+<div id="dialog-delete" class="custom_custom_invisible">
+	<h1>{% trans "Delete Confirmation" %}</h1>
+	<p>
+		{%comment%}Translators:Confirmation for deletion of file in the web portal.{%endcomment%}
+		{% trans "The following files have been selected for deletion." %}
+		{%comment%}Translators:Confirmation for deletion of file in the web portal.{%endcomment%}
+		{% trans "Are you sure you want to delete? You could restore deleted later." %}
+		{% trans "Questions? Click" %} <a href="/portal/help/portalinfo/#deleting_files">{% trans "online help"%}</a>.
+	</p>
+	<hr />
+	<ul id="dialog-delete-files"></ul>
+	<hr />
+	<div class="dialog-buttons">
+		<a id="button-del-delete" class="dialog-button" data-mode="delete" data-type="ok">{% trans "Delete" %}</a>
+		<a id="button-del-cancel" class="dialog-button blue" data-mode="delete" data-type="cancel">{% trans "Cancel" %}</a>
+	</div>
+</div>
+<div id="dialog-same-name" class="custom_custom_invisible">
+	<h1>{% trans "Warning" %}</h1>
+	<p>
+		{% trans "A file with the same name already exists in your folder. Click Continue to overwrite it. The previous file will be available from its version history." %}
+	</p>
+	<hr />
+	<div class="dialog-buttons">
+		<a id="button-upload-continue" class="dialog-button blue">{% trans "Continue" %}</a>
+		<a id="button-upload-cancel" class="dialog-button">{% trans "Cancel upload" %}</a>
+	</div>
+</div>
+<div id="dialog-message" class="custom_invisible">
+	<h1>{% trans "Notice" %}</h1>
+	<p id="di-msg-content">
+		{% trans "You have no files selected. Please select some and try again." %}
+	</p>
+	<hr />
+	<div id="di-msg-buttons" class="dialog-buttons">
+		<a id="button-msg-close" class="dialog-button" data-mode="message" data-type="cancel">{% trans "Close" %}</a>
+	</div>
+</div>
+<div id="dialog-upload-size" class="custom_invisible">
+	<h1>{% trans "Warning" %}</h1>
+	<p id="di-msg-content">
+		{% trans "Please note that a success when uploading files of size over 100MB is not guaranteed." %}
+	</p>
+	<hr />
+	<div id="di-msg-buttons" class="dialog-buttons">
+		<a id="button-upload-size-continue" class="dialog-button">{% trans "Continue" %}</a>
+		<a id="button-upload-size-cancel" class="dialog-button">{% trans "Cancel upload" %}</a>
+	</div>
+</div>
+<div id="dialog-upload-size-warning" class="custom_invisible">
+	<h1>{% trans "Warning" %}</h1>
+	<p id="di-msg-content">
+		{% trans "Please note that a success when uploading files of size over 100MB is not guaranteed." %}
+	</p>
+	<hr />
+	<div id="di-msg-buttons" class="dialog-buttons">
+		<a id="button-upload-size-warning" class="dialog-button">{% trans "Close" %}</a>
+	</div>
+</div>
+<div id="dialog-autoprocess-parent" class="custom_invisible">
+	<h1>{% trans "Warning" %}</h1>
+	<p id="di-msg-content">
+		{% trans "You cannot turn off this option for this folder, because it is turned on for one of its parent folders." %}
+	</p>
+	<hr />
+	<div id="di-msg-buttons" class="dialog-buttons">
+		<a id="button-autoprocess-parent-cancel" class="dialog-button" data-mode="autoprocess-parent" data-type="cancel">{% trans "Close" %}</a>
+	</div>
+</div>
+<div id="dialog-upload-filename" class="custom_invisible">
+	<h1>{% trans "Warning" %}</h1>
+	<p id="di-msg-content">
+		{% trans 'The file name contains unsupported characters, which include the characters \ ? < > : * | &#37; & " / ~ and #.  Rename the file to allow it to be synchronized with the Cloud.' %}
+	</p>
+	<hr />
+	<div id="di-msg-buttons" class="dialog-buttons">
+		<a id="button-upload-filename" class="dialog-button" data-mode="message" data-type="cancel">{% trans "Close" %}</a>
+	</div>
+</div>
+<div id="dialog-notifications" class="custom_invisible">
+    <h1>{% trans "Announcements" %}</h1>
+    <p id="no-new-message">{% trans "There are no new announcements." %}</p>
+    <div class="all-notifications" id="unread-notifications">
+        <div id="notificationTemplate" class="custom_invisible">
+            <input type="hidden" id="notification-id"/>
+            <img src="{{ STATIC_URL }}images/announcement_accent.png" class="notification-img">
+            <div class="notification-text">
+                Some announcement text here
+            </div>
+            <div class="notification-options">
+                <a href="#" class="yes-option">{% trans "Yes" %}</a>
+                <a href="#" class="no-option">{% trans "Dismiss" %}</a>
+            </div>
+            <div class="notification-dismissed custom_invisible"></div>
+        </div>
+    </div>
+    <div class="previously-read-div">
+        <a href="#">{% trans "Previously read" %}</a>
+        <img src="{{ STATIC_URL }}images/clock.png">
+    </div>
+    <p id="no-read-message">{% trans "There are no read announcements." %}</p>
+    <div id="read-notifications" class="all-notifications">
+        <div id="readNotificationTemplate" class="custom_invisible">
+            <input type="hidden" id="notification-id"/>
+            <img src="{{ STATIC_URL }}images/announcement.png" class="notification-img">
+            <div class="notification-text">
+                Some announcement text here
+            </div>
+            <div class="notification-options">
+                <a href="#" class="yes-option">{% trans "Yes" %}</a>
+            </div>
+        </div>
+    </div>
+    <div class="dialog-buttons">
+        <a class="cancel dialog-button">{% trans "Close" %}</a>
+    </div>
+</div>
+<div id="dialog-feedback" class="custom_invisible">
+	<h1>{% trans "Feedback" %}</h1>
+	<p>
+		{% trans 'Please tell us what you think. Your feedback is highly appreciated.' %}
+	</p>
+
+	<div>
+		<form enctype="multipart/form-data" id="feedback"  class="site-form" name="feedbackform" action="/portal/send_feedback" method="POST">{% csrf_token %}
+		<table class="form-table feedback-table">
+			<tbody>
+			<tr >
+				<div id="categories">
+				<span class="selected_category">
+					<input type="radio" name="category" value="idea"/>
+					{%trans "Idea" %}
+				</span>
+				<span>
+					<input type="radio" name="category" value="problem"/>
+					{% trans "Problem" %}
+				</span>
+				<span>
+					<input type="radio" name="category" value="question"/>
+					{% trans "Question" %}
+				</span>
+				<span>
+					<input type="radio" name="category" value="praise"/>
+					{% trans "Praise" %}
+				</span>
+				</div>
+			</tr>
+			<tr>
+				<td class="input">
+				<textarea rows="10" cols="40" name="feedback_text" placeholder='{% trans "Your feedback" %}'></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="input">
+				<p id="feedback_empty" class="custom_invisible">{% trans "Please enter feedback." %}</p>
+				<p id="feedback_sending" class="custom_invisible">{% trans "Sending your feedback ..." %}</p>
+				<p id="feedback_sent" class="custom_invisible">{% trans "Your feedback was sent. Thank you!" %}</p>
+				<p id="feedback_error" class="custom_invisible">{% trans "We are sorry. An error occured sending your feedback." %}</p>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<hr />
+        <div class="dialog-buttons">
+            <input type="submit" value='{% trans "Send" %}' class="form-submit" onclick="ga('send', 'event', 'feedback_submit', 'click');"/>
+            <a onclick="toggleDialog()" class="cancel" >{% trans "Close" %}</a>
+        </div>
+		</form>
+	</div>
+</div>
+<div id="dialog-confirm-processing" class="custom_invisible">
+    <h1>{% trans "Confirmation" %}</h1>
+    <p id="di-msg-content">
+        {% trans "This will update and render viewports and create a PDF. Each sheet layer in the .vwx file will be a page in the PDF." %}
+    </p>
+    <hr />
+    <div id="di-msg-buttons" class="dialog-buttons">
+        <a id="button-confirm-processing-continue" class="dialog-button blue" data-mode="confirm-processing" data-type="ok">{% trans "Continue" %}</a>
+        <a id="button-confirm-processing-cancel" class="dialog-button" data-mode="confirm-processing" data-type="cancel">{% trans "Cancel" %}</a>
+    </div>
+    <span id="file_to_process" class="custom_invisible"></span>
+</div>
+<div id="dialog-confirm-autoprocessing" class="custom_invisible">
+    <h1>{% trans "Warning" %}</h1>
+    <p id="di-msg-content">
+        {% trans "This will update and render viewports, and generate PDFs for .vwx files in this folder and its sub-folders. If it contains a lot of files, this process may take some time to complete." %}
+    </p>
+    <hr />
+    <div id="di-msg-buttons" class="dialog-buttons">
+        <a id="button-confirm-autoprocessing-continue" class="dialog-button blue" data-mode="confirm-autoprocessing" data-type="ok">{% trans "Continue" %}</a>
+        <a id="button-confirm-autoprocessing-cancel" class="dialog-button" data-mode="confirm-autoprocessing" data-type="cancel">{% trans "Cancel" %}</a>
+    </div>
+</div>
+<div id="dialog-invalid-folder" class="custom_invisible">
+    <h1>{% trans "Warning" %}</h1>
+    <p id="di-msg-content">
+        {% trans 'The folder name contains unsupported characters, which include the characters \ ? < > : * | &#37; & " / ~ and #.  Rename the folder to open it.' %}
+    </p>
+    <hr />
+    <div id="di-msg-buttons" class="dialog-buttons">
+        <a onclick="toggleDialog()" class="dialog-button blue" >{% trans "Close" %}</a>
+    </div>
+</div>
+<div id="dialog-invalid-file" class="custom_invisible">
+    <h1>{% trans "Warning" %}</h1>
+    <p id="di-msg-content">
+        {% trans 'The file name contains unsupported characters, which include the characters \ ? < > : * | &#37; & " / ~ and #.  Rename the file to manage it from your cloud library.' %}
+    </p>
+    <hr />
+    <div id="di-msg-buttons" class="dialog-buttons">
+        <a onclick="toggleDialog()" class="dialog-button blue" >{% trans "Close" %}</a>
+    </div>
+</div>
+<div id="dialog-dropbox-expired-revoked" class="custom_invisible">
+    <h1>{% trans "Warning" %}</h1>
+    <p id="di-msg-content">
+        {% trans "There was an error while trying to retrieve your Dropbox files. Re-enabling Dropbox integration from account settings might solve the problem." %}
+    </p>
+    <hr />
+    <div id="di-msg-buttons" class="dialog-buttons">
+        <a class="dialog-button blue" data-mode="dropbox-expired-revoked" data-type="cancel">{% trans "Close" %}</a>
+    </div>
+</div>
+<div id="dialog-internal-server-error" class="custom_invisible">
+    <h1>{% trans "Warning" %}</h1>
+    <p id="di-msg-content">
+        {% trans "We're sorry, there was an error while trying to load server data." %}
+    </p>
+    <hr />
+    <div id="di-msg-buttons" class="dialog-buttons">
+        <a class="dialog-button blue" data-mode="internal-server-error" data-type="cancel">{% trans "Close" %}</a>
+    </div>
+</div>
+<div id="dialog-set-autoprocessing-error" class="custom_invisible">
+    <h1>{% trans "Warning" %}</h1>
+    <p id="di-msg-content">
+        {% trans "An error has occurred. Please try again later." %}
+    </p>
+    <hr />
+    <div id="di-msg-buttons" class="dialog-buttons">
+        <a class="dialog-button blue" data-mode="set-autoprocessing-error" data-type="cancel">{% trans "Close" %}</a>
+    </div>
+</div>
+<div id="dialog-file-deletion-error" class="custom_invisible">
+    <h1>{% trans "Warning" %}</h1>
+    <p id="di-msg-content">
+        {% trans "We're sorry, but an error has occured deleting " %}
+        <span id="msg-content-filename"></span>
+        {% trans ". Perhaps it was deleted already. Please refresh the page." %}
+    </p>
+    <hr />
+    <div id="di-msg-buttons" class="dialog-buttons">
+        <a class="dialog-button blue" data-mode="file-deletion-error" data-type="cancel">{% trans "Close" %}</a>
+    </div>
+</div>
+

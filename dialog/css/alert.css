@@ -1,0 +1,214 @@
+#dialog-overlay {
+    /* set it to fill the whole screen */
+    width: auto;
+    min-width:100%;
+    height: auto;
+    min-height:100%;
+
+    /* transparency for different browsers */
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    background:#000;
+ 
+    /* make sure it appear behind the dialog box but above everything else */
+    position:fixed;
+    top:0; left:0;
+    z-index:3000;
+ 
+    /* hide it by default */
+    display:none;
+}
+  
+
+/* ===ALERT=== */
+#dialog-box {
+  width: 450px;
+  font-size: 12px;
+  line-height: 16px;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  margin: 20px;
+  border-radius: 10px;
+  /* Drop shadow */
+  -moz-box-shadow: 0px 0px 5px #333333;
+  -webkit-box-shadow: 0px 0px 5px #333333;
+  box-shadow: 0px 0px 5px #333333;
+  
+  display:none;
+  
+  /* make sure it has the highest z-index */
+  position:absolute;
+  z-index:5000;
+}
+#dialog-box h1 {
+  background-image: url(images/alert.png);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 40px;
+  padding-left: 63px;
+  padding-top: 27px;
+  margin-left: -10px;
+  padding-bottom: 4px;
+}
+#dialog-box h1.di-header-loading {
+    background-image: url(images/loading-spinner.gif);
+}
+
+#dialog-box #dialog-inner {
+  margin: 20px;
+  /* Drop shadow */
+  -moz-box-shadow: 0px 0px 5px #333333;
+  -webkit-box-shadow: 0px 0px 5px #333333;
+  box-shadow: 0px 0px 5px #333333;
+  border: 1px #a1a1a5 solid;
+  border-radius: 6px;
+  padding: 10px 18px 10px 26px;
+}
+#dialog-box #dialog-inner .dialog-buttons {
+  text-align: right;
+  margin: 22px 0 8px 0;
+}
+#dialog-box #dialog-inner ul.delete-files {
+  list-style: none;
+  margin: 0;
+}
+#dialog-box #dialog-inner ul.delete-files li {
+  margin: 2px 0;
+}
+#dialog-box #dialog-inner hr {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+#dialog-box #dialog-inner a.dialog-button {
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  border: 1px #000000 solid;
+  color: #000000;
+  cursor: pointer;
+  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  margin-bottom: 1em;
+  margin-right: .5em;
+  padding: 3px 14px;
+  margin-top: 0;
+  text-align: center;
+  font-size: 1.2em;
+}
+#dialog-box #dialog-inner input.form-submit, #dialog-box #dialog-inner a.dialog-button.blue {
+  background: #1fbab0;
+  border-radius: 20px;
+  border: 1px #1fbab0 solid;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  margin-bottom: 1em;
+  margin-right: .5em;
+  padding: 2px 14px;
+  margin-top: 0;
+  text-align: center;
+  font-size: 1.2em;
+}
+#dialog-box #dialog-inner a.dialog-button:hover {
+  text-decoration: none;
+}
+#dialog-box #dialog-inner input.form-submit:active,
+#dialog-box #dialog-inner a.dialog-button:active {
+  background: none repeat scroll 0 0 #616265;
+  border-color: #555555;
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 #222222;
+}
+
+/* === SHARE FORM === */
+#dialog-share-file h1 {
+    background-image: none;
+    padding-left: 9px;
+}
+
+.share-info {
+    padding : 10px 16px;
+}
+
+.share-info#file-list{
+    max-height: 180px;
+    overflow: auto;
+}
+
+.note {
+    color: #EE0000;
+}
+
+.validationMessage {
+    padding-left: 10px;
+    color: red;
+}
+
+/* === FEEDBACK FORM === */
+
+#dialog-feedback h1 {
+  background-image: none;
+  padding-left: 9px;
+}
+#dialog-feedback textarea:focus{
+    outline: none !important;
+    border:1px solid #1fbab0;
+    box-shadow: 0 0 5px #1fbab0;
+}
+.selected_category{
+    background: #1fbab0 !important;
+    border: none !important;
+    color: #ffffff !important;
+}
+.category_icon{
+    width:16px;
+    margin-bottom: 0px;
+}
+.feedback_text_editable
+{
+  background-color: #fff;
+}
+
+.feedback_text_not_editable
+{
+  background-color: #DCDCDC
+}
+
+#categories span{
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #FFF;
+    border-radius: 20px;
+    border: 1px #000000 solid;
+    color: #000000;
+    cursor: pointer;
+    font-family: "Arial Narrow",Arial,Helvetica,sans-serif;
+    font-weight: normal;
+    padding: 4px 8px;
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.2em;
+}
+#categories input{
+    display: none;
+}
+#feedback_sending, #feedback_sent, #feedback_error, #feedback_empty{
+    margin: 6px 0px;
+    font-size: 1.2em;
+}
+
+#dialog-feedback textarea{
+    resize: none;
+}
+
+.form-table .feedback-table{
+	width: 364px;
+}
+
+#categories{
+	width: 364px;
+}
+
+
