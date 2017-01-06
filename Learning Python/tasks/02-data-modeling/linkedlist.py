@@ -7,7 +7,7 @@ def Cons(val, nxt):
 class List(object):
 
     def __init__(self, head):
-        pass
+        self._head = head
 
     @classmethod
     def create(cls, *args):
