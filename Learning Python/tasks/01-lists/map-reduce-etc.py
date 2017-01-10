@@ -4,38 +4,34 @@
 import re
 
 def is_even(a, b):
-    while a < b:
+    for a in range(b):
         if a % 2 == 0:
             print a
-        a += 1
 
 def get_upper(st):
     print re.sub('[^A-Z]', '', st)
 
 def task3(a, b):
     res = {}
-
-    while a <= b:
+    def
+    for a in range(b+1):
         res[a] = a % 5
-        a += 1
     print res
 
 def task4(lst):
     res = {}
 
     a = 0
-    while a < len(lst):
+    for a in range(len(lst)):
         res[lst[a]] = len(lst[a])
-        a+=1
     print res
 
 def task5(lst):
     count = 0
     i = 0
-    while i < len(lst):
+    for i in range(len(lst)):
         if lst[i] % 2 == 0 and lst[i] > 0:
             count += 1
-        i += 1
     print count
 
 def task6(st):
@@ -45,9 +41,8 @@ def task6(st):
 def task7(lst):
     res = 0
     i = 0
-    while i < len(lst):
+    for i in range(len(lst)):
         res += lst[i] * lst[i]
-        i+=1
     print res
 
 def task8(txt):
@@ -57,7 +52,7 @@ def task9(txt):
     count = 0
     i = 0
     words = txt.split(' ')
-    while i < len(words):
+    for i in range(len(words)):
         if words[i] == 'Dickens':
             count += 1
         i+=1

@@ -9,15 +9,17 @@ def calc(x, y):
     pass
 """
 
-
+@validate(int, float)
 def is_number(n):
     pass
 
 
+@validate(string)
 def is_string(n):
     pass
 
 
+@validate(type)
 def is_instanceof(type):
     pass
 
