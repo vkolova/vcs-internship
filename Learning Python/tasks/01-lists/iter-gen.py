@@ -56,23 +56,13 @@ def concat3(x, y, z):
 
 
 def zip_with(func, *iterables):
-    if not iterables:
+    if not len(iterables):
         yield []
-    else:
-        l = len(iterables[0])
-        i = 1
-        while i < len(iterables):
-            if l < len(iterables[i]):
-                l = len(iterables[i])
-            i += 1
 
-        i = 0
-        j = 0
-        for j in range(len(iterables)):
-            while i < l:
-                res = func(iterables[j][i], iterables[j+1][i], iterables[j+2][i])
-                yield res
-                i += 1
+    shortest_iterable = min(map(len, iterables))
+    for i in range (0, shortest_iterable):
+        yield func(*[e[i] for e in iterables])
+
 
 first_names = ['John', 'Miles']
 last_names = ['Coltrane', 'Davis']

@@ -4,7 +4,7 @@
 import re
 
 def is_even(a, b):
-    for a in range(b):
+    for a in range(a, b):
         if a % 2 == 0:
             print a
 
@@ -13,23 +13,19 @@ def get_upper(st):
 
 def task3(a, b):
     res = {}
-    def
     for a in range(b+1):
         res[a] = a % 5
     print res
 
 def task4(lst):
     res = {}
-
-    a = 0
-    for a in range(len(lst)):
+    for a in range(0, len(lst)):
         res[lst[a]] = len(lst[a])
     print res
 
 def task5(lst):
     count = 0
-    i = 0
-    for i in range(len(lst)):
+    for i in range(0, len(lst)):
         if lst[i] % 2 == 0 and lst[i] > 0:
             count += 1
     print count
@@ -40,8 +36,7 @@ def task6(st):
 
 def task7(lst):
     res = 0
-    i = 0
-    for i in range(len(lst)):
+    for i in range(0, len(lst)):
         res += lst[i] * lst[i]
     print res
 
@@ -50,9 +45,8 @@ def task8(txt):
 
 def task9(txt):
     count = 0
-    i = 0
     words = txt.split(' ')
-    for i in range(len(words)):
+    for i in range(0, len(words)):
         if words[i] == 'Dickens':
             count += 1
         i+=1

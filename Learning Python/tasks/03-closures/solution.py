@@ -1,43 +1,47 @@
 def gt(x):
-    def check(y):
+    def predicate(y):
         return y > x
-    return check
+    return predicate
 
 def lt(x):
-    def check(y):
+    def predicate(y):
         return y < x
-    return check
+    return predicate
 
 def eq(x):
-    def check(y):
+    def predicate(y):
         return y == x
-    return check
+    return predicate
 
 def oftype(t):
-    def check(y):
-        return type(y) == t
-    return check
+    def predicate(y):
+        return isinstance(y, t)
+    return predicate
 
 def present():
-    def check(x):
+    def predicate(x):
         return x != None
-    return present
+    return predicate
 
 def pred(function):
-    return function() == True
+    def predicate(x):
+        return function(x)
+    return predicate
 
 def for_any(*predicates):
-    i = 0
-    while i < len(predicates):
-        return predicates[i]() == True
-        i += 1
-    return False
+    def predicate(arg):
+        flag = False
+        for i in range(0, len(predicates)):
+            if predicates[i](arg):
+                flag = True
+        return flag
+    return predicate
 
 def for_all(*predicates):
-    flag = True
-    i = 0
-    while i < len(predicates):
-        if predicates[i]() != True:
-            flag = False
-        i+=1
-    return flag
+    def predicate(arg):
+        flag = True
+        for i in range(0, len(predicates)):
+            if not predicates[i](arg):
+                flag = False
+        return flag
+    return predicate
