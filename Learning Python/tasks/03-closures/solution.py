@@ -45,3 +45,17 @@ def for_all(*predicates):
                 flag = False
         return flag
     return predicate
+
+def and_(a, b):
+    def predicate(arg):
+        def func(ar):
+            return a(arg) & b(arg)
+        return func
+    return predicate
+
+def __invert__(a):
+    def predicate(b):
+        return ~a(b)()
+    return predicate
+
+print (~eq(0))(20)

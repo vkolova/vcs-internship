@@ -22,7 +22,7 @@ Hint: use list comprehension + recursion
 '''
 
 def flatten(xs):
-    pass
+    return [item for xs in a for ll in xs for item in ll]
 
 
 if __name__ == "__main__":

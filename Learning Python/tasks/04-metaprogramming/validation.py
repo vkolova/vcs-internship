@@ -10,61 +10,39 @@ def calc(x, y):
     pass
 """
 
-def number(f):
-    def decorator_function(n):
-        return isinstance(n, int) or isinstance(n, float)
-    return decorator_function
+def number(n):
+    return isinstance(n, int) or isinstance(n, float)
 
-@number
-def is_number(n):
-    pass
+def string(val):
+    return isinstance(val, str)
 
-def string(f):
-    def decorator_function(n):
-        return isinstance(n, str)
-    return decorator_function
+def instance(type):
+    def decorator_func(val):
+        return isinstance(n, type)
+    return decorator_func
 
-@string
-def is_string(n):
-    pass
+class arg(object):
+    def __init__(self, name, validators):
+        self.name = name
+        self.validators = validators
 
-def instance(f):
-    def decorator_function(type):
-        def decorator_func(n):
-            return isinstance(n, type)
-        return decorator_func
-    return decorator_function
-
-@instance
-def is_instanceof(type):
-    pass
-
-
-def arguments(f):
-    def decorator_arg(name, validators):
-        def validate(arg_name, arg_value):
-            if arg_name != name:
-                return
-
-            for validator in validators:
-                if not validator(arg_value):
-                    print "Wrong type"
-        return validate
-    return decorator_arg
-
-@arguments
-def arg(name, validators):
-    pass
+    def validate(self, value):
+        for validator in self.validators:
+            if not validator(value):
+                raise ValidationError
 
 
 def validation(*validators):
-    def validation_wrapper(**kwargs):
-        for k, v in kwargs.items():
-            for validator_func in validators:
-                validator_func(k, v)
+    validators = {a.name: a for a in validators}
+    def decorator(func):
+        def wrapper(**kwargs):
+            for k, v in kwargs.items():
+                validator = validators[k]
+                validator.validate(v)
 
-            func()
-    return validation_wrapper
+            func(**kwargs)
+        return wrapper
+    return decorator
 
 @validation(arg('x', [is_number, lambda x: x > 0]),
     arg('y', [is_instanceof(collections.Iterable)]))

@@ -1,17 +1,11 @@
 # not finished.
 
 def groupby(func, seq):
-    i = 0
     res = {}
-    res[seq[0]] = []
-    res[seq[1]] = []
 
-    while i < len(seq):
-        if seq[i] %2 == 0:
-            res[seq[0]].append(seq[i])
-        else:
-            res[seq[1]].append(seq[i])
-        i+=1
+    for i in seq:
+        key = func(i)
+        res.setdefault(key, []).append(i)
 
     print res
     # print func(res)
@@ -22,21 +16,18 @@ def groupby(func, seq):
 def double(x):
     return 2 * x
 
-def iterate(identity):
-    i = 0
+def identity(x):
+    return x
+
+def compose(f, g):
+    return lambda x: f(g(x))
+
+def iterate(func):
+    current_func = identity
 
     while True:
-        def func(x):
-            if i == 0:
-                return x
-            else:
-                res = x
-                for _ in range(i):
-                    res = identity(res)
-                return res
-
-        yield func
-        i += 1
+        yield current_func
+        current_func = compose(current_func, func)
 
 
 # i = iterate(double)
