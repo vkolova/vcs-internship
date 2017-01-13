@@ -1,0 +1,21 @@
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/styles.css' %}" />
+
+<title>Untitled</title>
+
+
+<div class="container">
+  <a href="/blog"><h1>Confessions of a programmer</h1></a>
+
+  <div class="body">
+    {% for article in latest_articles_list %}
+    <div class="segment">
+      <img class="header" src="{{ article.header.url }}" alt="">
+      <a href="{% url 'blog:detail' article.id %}">{{ article.title }}</a>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>

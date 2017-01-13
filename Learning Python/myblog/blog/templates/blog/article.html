@@ -1,0 +1,20 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/styles.css' %}" />
+
+<div class="container">
+  <a href="/blog"><h1>Confessions of a programmer</h1></a>
+
+  <div class="body">
+
+      <h2>{{ article.title }}</h2>
+      <div class="details">
+        <span>Published: {{ article.pub_date }}</span>
+        <span>Author: {{ article.author }}</span>
+      </div>
+      <img class="header" src="{{ article.header.url }}" alt="">
+      <div class="article">
+        {{ article.content | safe }}
+      </div>
+  </div>
+</div>
