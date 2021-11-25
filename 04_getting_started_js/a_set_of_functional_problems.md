@@ -20,7 +20,7 @@ JavaScript is a dynamic language, which means that we do not explicitly declare 
 
 But there are types. In JavaScript, we have a `typeof` operator which returns the __string representation__ of the type.
 
-We have the following types (This is `types.js` file in the current folder):
+We have the following types:
 
 ```javascript
 "use strict";
