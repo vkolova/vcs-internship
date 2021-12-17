@@ -11,6 +11,7 @@ Using Django and React.js, create a simple copy of [linkslist.app](https://www.l
 - Use SASS for styling. Use classes to re-use styles as you see fit.
 - Use Django for Back-end server
 - Use the [Django REST framework](https://www.django-rest-framework.org/) for the API endpoints
+- Add unit tests for the APIs! Use [pytest](https://docs.pytest.org/en/6.2.x/)
 
 ***Functional requirements:***
 - At the very least, your application should allow users to create, edit, delete and share link lists.
