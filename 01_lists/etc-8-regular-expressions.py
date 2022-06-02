@@ -5,6 +5,6 @@ def find_years_mentions():
 
     dickens_mentioned = re.findall('Dickens', s)
     print('Dickens mentioned %i times'%(len(dickens_mentioned)))
-    years_mentioned = re.findall('\d\d\d\d', s)
+    years_mentioned = re.findall('\d{4}', s)
     print('Years mentioned: ', years_mentioned)
 
