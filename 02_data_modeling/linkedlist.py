@@ -13,6 +13,7 @@ class Iterator:
             self.current = self.current.next
             return item
 
+
 class Cons:
     def __init__(self, data, next):
         self.data = data
@@ -25,7 +26,8 @@ class Cons:
         return [d for d in self]
 
     def __repr__(self):
-        return '<' + ', '.join([str(s) for s in self.get_list()]) + '>'
+        return '<' + ', '.join(
+            [str(s) for s in self.get_list()]) + '>'
 
 
 class List:
@@ -42,7 +44,8 @@ class List:
         return self.head.get_list()
 
     def __repr__(self):
-        return '<' + ', '.join([str(d) for d in self if self.head.next != nil]) + '>'
+        return '<' + ', '.join(
+            [str(d) for d in self if self.head.next != nil]) + '>'
 
     def __iter__(self):
         return Iterator(self.head)
@@ -55,7 +58,9 @@ class List:
                 if count == item:
                     return current_node.data
                 elif current_node.next == nil:
-                    raise IndexError('Index {} out of bounds for linked list of size {}'.format(item, count))
+                    raise IndexError(
+                        'Index {} out of bounds for linked list of size {}'
+                        .format(item, count))
                 else:
                     current_node = current_node.next
                     count += 1
@@ -66,14 +71,15 @@ class List:
             return result
 
 
-
 nil = "?"
+
 
 def make_list(*items):
     llist = Cons(items[-1], nil)
     for i in items[-2::-1]:
         llist = Cons(i, llist)
     return llist
+
 
 """
 Create a linked list with idiomatic python interface
@@ -103,7 +109,6 @@ Indexing:
     4
 
 """
-
 
 if __name__ == "__main__":
     import doctest

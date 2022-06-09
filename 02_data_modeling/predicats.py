@@ -1,7 +1,3 @@
-import operator
-import functools
-
-
 class Predicate:
     def __init__(self, func):
         self.func = func

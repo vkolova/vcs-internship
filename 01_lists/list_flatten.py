@@ -1,11 +1,9 @@
-import collections
-
 """
 Task: Fill replace the ??? and define the flatten function
 >>> a = [[1, 2], [3, 4], [5, 6]]
 
 1. Flatten the list with list comprehension
->>> [i for l in a for i in l] 
+>>> [i for l in a for i in l]
 [1, 2, 3, 4, 5, 6]
 
 2. Flatten the list with list comprehension
@@ -22,10 +20,11 @@ Hint: use list comprehension + recursion
 """
 
 
-def flatten(l):
-    elements = [el for el in l if not isinstance(el, list)] # elements
-    lists = [el for el in l if isinstance(el, list)] # lists
-    return flatten(elements + [i for ll in lists for i in ll]) if len(lists) else elements
+def flatten(input_list):
+    elements = [el for el in input_list if not isinstance(el, list)]
+    lists = [el for el in input_list if isinstance(el, list)]
+    return (flatten(elements + [i for ll in lists for i in ll])
+            if len(lists) else elements)
 
 
 if __name__ == "__main__":

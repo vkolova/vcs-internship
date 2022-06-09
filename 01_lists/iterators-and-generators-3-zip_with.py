@@ -1,6 +1,7 @@
 def concat3(x, y, z):
     return x + y + z
 
+
 def zip_with(func, *args):
     if not callable(func):
         raise TypeError('First argument must be a function!')

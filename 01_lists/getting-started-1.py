@@ -5,4 +5,3 @@ def triangle_type(a, b, c):
         return "равнобедрен"
     else:
         return "разностранен"
-    

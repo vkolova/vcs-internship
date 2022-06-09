@@ -4,7 +4,6 @@ def sum_squares(a, b):
     if a >= b:
         raise ValueError('Invalid interval selected!')
 
-    sq_sum = sum(map(lambda x: x**2, range(a,b)))
+    sq_sum = sum(map(lambda x: x**2, range(a, b)))
 
     print(sq_sum)
-

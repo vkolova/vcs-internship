@@ -1,11 +1,14 @@
 def double(x):
     return 2 * x
 
+
 def identity(x):
     return x
 
+
 def compose(outer_func, inner_func):
     return lambda x: outer_func(inner_func(x))
+
 
 def iterate(func):
     current = identity
