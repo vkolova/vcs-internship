@@ -1,4 +1,4 @@
-def GetUpperLetters(str):
+def get_upper_letters(str):
     return "".join([ch for ch in str if ch.isupper()])
 
-print(GetUpperLetters("TestCase"))
+print(get_upper_letters("TestCase"))
