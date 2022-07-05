@@ -1,8 +1,4 @@
-def func(list):
-    count = 0
-    for num in list:
-        if num % 2 == 0:
-            count += 1
-    return count
+def count_even_numbers(list):
+    return len([num for num in list if num % 2 == 0])
 
-print(func([1, 2, 4]))
+print(count_even_numbers([1, 2, 4]))

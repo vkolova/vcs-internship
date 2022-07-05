@@ -1,12 +1,7 @@
-def func(w1, w2):
-    w1 = w1.lower()
-    w2 = w2.lower()
-    w1 = sorted(w1)
-    w2 = sorted(w2)
-    
-    if w1 == w2:
-        return "ANAGRAMS"
-    else:
-        return "NOT ANAGRAMS"
+def is_anagram(w1, w2):
+    return "ANAGRAMS" if sorted(w1.lower()) == sorted(w2.lower()) else "NOT ANAGRAMS"
 
-print(func("silent", "listen"))
+word1 = input("Enter first word: ")
+word2 = input("Enter second word: ")
+
+print(is_anagram(word1, word2))
